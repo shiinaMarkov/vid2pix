@@ -1,14 +1,9 @@
 import cv2
 import os
 from pathlib import Path, PureWindowsPath
-from PIL import Image
-
-import matplotlib.pyplot as plt
-import matplotlib.image as img
-
 import numpy as np
 
-FRAME_OUTPUT_PATH = Path("frames")
+FRAME_OUTPUT_PATH = Path("frames") #Should change this to frames dir where lua script is
 VIDEO_PATH = Path("badapple.mp4")
 
 # Current settings for arcade pacman
@@ -26,6 +21,7 @@ def write_frame_txt(frame_name, img_arr):
             row_str = ' '.join(map(str, row))
             my_list_file.write(row_str + "\n")
 
+#Makes image file only have 2 values which are black(0) and white(255)
 def binarize_arr(arr):
     for i in range(0,len(arr)):
         for j in range(0,len(arr[i])):
@@ -35,12 +31,12 @@ def binarize_arr(arr):
                 arr[i][j] = 255
     return arr            
 
-
+#Convert numpy 3d array to 2d list
 def convert_np_arr(npdata):
     td_arr = npdata[:,:,0]
     return td_arr
 
-
+#Removes frames images and files
 def remove_files(frames_path):
     file_list = os.listdir(frames_path)
 
